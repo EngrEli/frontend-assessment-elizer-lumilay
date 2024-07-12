@@ -1,16 +1,12 @@
 <template>
-    <div class="max-w-7xl mx-auto flex mt-9 flex-wrap justify-around pb-9">
+    <div
+        class="max-w-7xl mx-auto flex mt-9 flex-wrap gap-1 justify-around pb-9"
+    >
         <Cards
+            v-for="data in cardData"
+            :key="data"
+            :card-content="data.content"
             card-image="https://via.placeholder.com/400x300"
-            card-content="Maecenas nec semper ante, pellentesque posuere lorem. Nullam ipsum massa, consequat eget urna ut, pulvinar dignissim lorem. Nulla facilisi. Nam mattis eleifend metus. Fusce at commodo lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus pellentesque elit sem, vel blandit posuere."
-        />
-        <Cards
-            card-image="https://via.placeholder.com/400x300"
-            card-content="Maecenas nec semper ante, pellentesque posuere lorem. Nullam ipsum massa, consequat eget urna ut, pulvinar dignissim lorem. Nulla facilisi. Nam mattis eleifend metus. Fusce at commodo lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus pellentesque elit sem, vel blandit posuere."
-        />
-        <Cards
-            card-image="https://via.placeholder.com/400x300"
-            card-content="Maecenas nec semper ante, pellentesque posuere lorem. Nullam ipsum massa, consequat eget urna ut, pulvinar dignissim lorem. Nulla facilisi. Nam mattis eleifend metus. Fusce at commodo lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus pellentesque elit sem, vel blandit posuere."
         />
     </div>
 </template>
@@ -18,4 +14,12 @@
 <style></style>
 <script setup>
 import Cards from "./Shared/Cards.vue";
+import CardsData from "../data/data.json";
+import { onMounted, ref } from "vue";
+
+const cardData = ref(CardsData);
+
+onMounted(() => {
+    console.log(cardData.value, "this is cardData");
+});
 </script>

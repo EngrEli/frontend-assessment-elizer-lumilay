@@ -1,7 +1,7 @@
 <template>
-    <div :class="['button', `${buttonClass}`]" @click="buttonClick">
+    <button :class="['button', `${buttonClass}`]" @click="buttonClick">
         {{ buttonText }}
-    </div>
+    </button>
 </template>
 
 <style>
