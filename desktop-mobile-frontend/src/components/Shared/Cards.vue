@@ -3,10 +3,16 @@
         <div class="card__image">
             <img :src="`${cardImage}`" />
         </div>
-        <div class="card__content" v-html="cardContent"></div>
+        <div
+            :class="[
+                'card__content',
+                { 'card__content--shown': isContentShown },
+            ]"
+            v-html="cardContent"
+        ></div>
         <div class="card__card-button-container">
             <Button
-                @handleClick="handleClick"
+                @click="toggleCardEmit"
                 button-text="READ MORE"
                 button-class="button--card-primary"
             />
@@ -16,7 +22,6 @@
 
 <style>
 .card {
-    flex: 0 0 30%;
     margin-top: 15px;
     min-height: 400px;
     padding: 15px;
@@ -32,10 +37,14 @@
 
 .card__content {
     min-height: 100px;
-    max-height: 150px;
+    max-height: 100px;
     overflow: hidden;
     margin-top: 8px;
     text-align: center;
+}
+
+.card__content--shown {
+    max-height: fit-content !important;
 }
 
 .card__card-button-container {
@@ -43,16 +52,49 @@
     justify-content: center;
     margin-top: 15px;
 }
+
+@media only screen and (min-width: 768px) {
+    .card {
+        flex: 0 0 30%;
+    }
+}
 </style>
 <script setup>
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import Button from "./Button.vue";
+import ConditionalButton from "./ConditionalButton.vue";
+const emit = defineEmits(["toggleCardShow"]);
 
 const props = defineProps({
     cardImage: String,
     cardContent: String,
+    isContentShown: Boolean,
+});
+const isDesktopView = ref(false);
+
+const toggleCardEmit = () => {
+    if (isDesktopView.value) {
+        window.open("/", "_blank");
+    } else {
+        emit("toggleCardShow");
+    }
+};
+
+onMounted(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    handleWindowSizeChange();
 });
 
-const handleClick = () => {
-    console.log("you clicked");
+onUnmounted(() => {
+    window.removeEventListener("resize", handleWindowSizeChange);
+});
+
+const handleWindowSizeChange = () => {
+    console.log(screen.width, "screen width");
+    if (screen.width <= 768) {
+        isDesktopView.value = false;
+    } else {
+        isDesktopView.value = true;
+    }
 };
 </script>
