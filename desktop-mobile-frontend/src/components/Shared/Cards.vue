@@ -13,8 +13,9 @@
         <div class="card__card-button-container">
             <Button
                 @click="toggleCardEmit"
-                button-text="READ MORE"
+                :button-text="isContentShown ? 'SEE LESS' : 'READ MORE'"
                 button-class="button--card-primary"
+                :is-content-shown="isContentShown"
             />
         </div>
     </div>
@@ -22,10 +23,15 @@
 
 <style>
 .card {
-    margin-top: 15px;
+    width: 300px;
+    margin: auto;
+    margin-top: 25px;
     min-height: 400px;
     padding: 15px;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     box-shadow: 3px 2px 29px -12px rgba(0, 0, 0, 0.39);
     -webkit-box-shadow: 3px 2px 29px -12px rgba(0, 0, 0, 0.39);
     -moz-box-shadow: 3px 2px 29px -12px rgba(0, 0, 0, 0.39);
@@ -44,7 +50,7 @@
 }
 
 .card__content--shown {
-    max-height: fit-content !important;
+    max-height: fit-content;
 }
 
 .card__card-button-container {
@@ -60,41 +66,21 @@
 }
 </style>
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from "vue";
 import Button from "./Button.vue";
-import ConditionalButton from "./ConditionalButton.vue";
 const emit = defineEmits(["toggleCardShow"]);
 
 const props = defineProps({
     cardImage: String,
     cardContent: String,
     isContentShown: Boolean,
+    isDesktopView: Boolean,
 });
-const isDesktopView = ref(false);
 
 const toggleCardEmit = () => {
-    if (isDesktopView.value) {
+    if (props.isDesktopView) {
         window.open("/", "_blank");
     } else {
         emit("toggleCardShow");
-    }
-};
-
-onMounted(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    handleWindowSizeChange();
-});
-
-onUnmounted(() => {
-    window.removeEventListener("resize", handleWindowSizeChange);
-});
-
-const handleWindowSizeChange = () => {
-    console.log(screen.width, "screen width");
-    if (screen.width <= 768) {
-        isDesktopView.value = false;
-    } else {
-        isDesktopView.value = true;
     }
 };
 </script>
