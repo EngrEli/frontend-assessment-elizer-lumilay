@@ -78,7 +78,7 @@ const props = defineProps({
 
 const handleCardAction = () => {
     if (props.isDesktopView) {
-        window.open("/", "_blank");
+        alert("Read More Button Clicked");
     } else {
         emit("toggleCardShow");
     }
