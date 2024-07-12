@@ -7,7 +7,7 @@ Vue JS, CSS (BEM naming), Tailwind CSS
 Exercise 1
 ---
 
-For Exercise-1, I created two main components: **MainHero** and **CardsContainer**. The MainHero component contains the banner template and styles, which I styled using Tailwind CSS. The CardsContainer houses my reusable **Cards** and **Button** components. Instead of using a static approach for the Cards component, I created a data.json file to provide dynamic content for the cards. I ensured that the Cards and Button components are reusable for scalability. Additionally, I left comments on functions for better **readability**.
+For Exercise-1, I created two main components: **MainHero** and **CardsContainer**. The MainHero component contains the banner template and styles, which I styled using Tailwind CSS. The CardsContainer houses my reusable **Cards** and **Button** components. Instead of using a static approach for the Cards component, I created a data.json file to provide dynamic content for the cards. I ensured that the Cards and Button components are reusable for scalability. Additionally, I left comments on functions for better **readability**. I also added functionality where the user can toggle the READ MORE/SEE LESS button to show/hide some of the content inside the card. This can be seen in the mobile view.
 
 Exercise 2
 ---
