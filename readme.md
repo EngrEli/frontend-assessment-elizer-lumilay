@@ -1,6 +1,4 @@
-**Please clone exercise 1 and 2 separately and then run npm i for necessary package installations**
----
-npm i
+**Please clone Exercise 1 and Exercise 2 separately, and then run `npm i` for necessary package installations.**
 
 Tech
 ---
