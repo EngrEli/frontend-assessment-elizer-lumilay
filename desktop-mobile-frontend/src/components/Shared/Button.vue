@@ -1,11 +1,5 @@
 <template>
-    <button
-        :class="[
-            'button',
-            `${buttonClass}`,
-            { 'button--active': isContentShown },
-        ]"
-    >
+    <button :class="['button', `${buttonClass}`]">
         {{ buttonText }}
     </button>
 </template>
@@ -26,13 +20,13 @@
 }
 
 .button--card-primary {
-    border-radius: 15px;
-    border: 2px solid #000;
+    border-radius: 50px;
+    border: 3px solid #000;
     color: #000;
     background-color: transparent;
 }
 
-.button--active {
+.button--card-primary.button--active {
     color: #fff;
     background-color: #000;
     border-color: #000;
@@ -54,15 +48,7 @@ const props = defineProps({
         default: "READ MORE",
     },
     buttonClass: {
-        type: String,
-        // We may add more classes in the future
-        validator(value) {
-            return ["button--card-primary"].includes(value);
-        },
-    },
-    isContentShown: {
-        type: Boolean,
-        default: false,
+        type: [String, Array],
     },
 });
 </script>

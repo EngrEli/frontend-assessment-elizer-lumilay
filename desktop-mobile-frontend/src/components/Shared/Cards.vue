@@ -12,10 +12,9 @@
         ></div>
         <div class="card__card-button-container">
             <Button
-                @click="toggleCardEmit"
-                :button-text="isContentShown ? 'SEE LESS' : 'READ MORE'"
-                button-class="button--card-primary"
-                :is-content-shown="isContentShown"
+                @click="handleCardAction"
+                :button-text="buttonText"
+                :button-class="buttonClass"
             />
         </div>
     </div>
@@ -66,6 +65,7 @@
 }
 </style>
 <script setup>
+import { computed } from "vue";
 import Button from "./Button.vue";
 const emit = defineEmits(["toggleCardShow"]);
 
@@ -76,11 +76,21 @@ const props = defineProps({
     isDesktopView: Boolean,
 });
 
-const toggleCardEmit = () => {
+const handleCardAction = () => {
     if (props.isDesktopView) {
         window.open("/", "_blank");
     } else {
         emit("toggleCardShow");
     }
 };
+
+const buttonText = computed(() => {
+    return props.isContentShown ? "SEE LESS" : "READ MORE";
+});
+
+const buttonClass = computed(() => {
+    return [
+        `button--card-primary ${props.isContentShown ? "button--active" : ""} `,
+    ];
+});
 </script>

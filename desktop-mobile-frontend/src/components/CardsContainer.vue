@@ -23,6 +23,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 const cardData = ref(CardsData);
 const openCardIndex = ref(null);
 
+// Toggle the accordion card and close any open card content accordion
 const toggleCard = (index) => {
     if (openCardIndex.value === index) {
         openCardIndex.value = null;
@@ -37,6 +38,7 @@ onMounted(() => {
     window.addEventListener("resize", handleWindowSizeChange);
     handleWindowSizeChange();
 
+    // Open the 1st card content accordion in mobile view
     if (isDesktopView.value) {
         openCardIndex.value = null;
     } else {
@@ -49,7 +51,6 @@ onUnmounted(() => {
 });
 
 const handleWindowSizeChange = () => {
-    console.log(screen.width, "screen width");
     if (screen.width <= 768) {
         isDesktopView.value = false;
     } else {
